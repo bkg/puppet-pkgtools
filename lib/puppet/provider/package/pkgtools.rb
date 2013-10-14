@@ -11,7 +11,7 @@ Puppet::Type.type(:package).provide :pkgtools, :parent => Puppet::Provider::Pack
   def self.instances
     packages = []
     groups = [:pkgname, :ensure, :name]
-    pat = /^(\S+)-([^-\s]+):\s+(\S+)$/
+    pat = /^(\S+)-([^-\s]+)\s+(\S+)$/
     pkg('info', '-ao').lines.each do |line| 
       match = pat.match(line)
       pkginfo = Hash[groups.zip(match.captures)]
