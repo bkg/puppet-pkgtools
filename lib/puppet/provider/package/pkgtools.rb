@@ -14,8 +14,7 @@ Puppet::Type.type(:package).provide :pkgtools, :parent => Puppet::Provider::Pack
     pat = /^(\S+)-([^-\s]+)\s+(\S+)$/
     pkg('info', '-ao').lines.each do |line| 
       match = pat.match(line)
-      pkginfo = Hash[groups.zip(match.captures)]
-      packages << new(pkginfo.merge! :name => self.name)
+      packages << new(Hash[groups.zip(match.captures)])
     end
     packages
   end
